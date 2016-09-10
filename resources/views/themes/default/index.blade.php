@@ -11,10 +11,10 @@
     <div class="collection-head">
         <div class="container">
             <div class="collection-title">
-                <h1 class="collection-header">Yuan Chao</h1>
+                <h1 class="collection-header">{{ systemConfig('author','huihui') }}</h1>
                 <div class="collection-info">
                     <span class="meta-info">
-                        如果不能成为拯救世界的神，那就堕落到征服世界的魔吧！
+                        {{ systemConfig('introduction','like xiaoli') }}
                     </span>
                 </div>
             </div>

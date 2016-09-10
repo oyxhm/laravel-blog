@@ -17,4 +17,7 @@ return [
     'smtp_name' => 'smtp 昵称',
     'smtp_pass' => 'smtp 密码',
     'smtp_port' => 'smtp 端口',
+
+    'introduction' => '网页昭告',
+    'author'       => '博客作者',
 ];
