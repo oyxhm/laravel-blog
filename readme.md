@@ -1,6 +1,7 @@
 ## laravel-5.1-blog
 
 Blog system development based on laravel  5.1.*
+此项目不是我写的，请查看原主的项目：https://github.com/yccphp/laravel-5-blog
 
 # Demo
 
