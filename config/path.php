@@ -16,6 +16,7 @@ return [
         'system'=>SYSTEM.'system.',
         'navigation'=>SYSTEM.'navigation.',
         'links'=>SYSTEM.'links.',
+        'advertises'=>SYSTEM.'advertises.',
         'user'=>USER,
         'comment'=>CONTENT.'comment.'
     ],
