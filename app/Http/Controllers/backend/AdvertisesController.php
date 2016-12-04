@@ -6,7 +6,7 @@ use App\Model\Advertises;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-// use App\Http\Requests\AdvertisesRequest;
+use App\Http\Requests\AdvertisesRequest;
 
 use App\Http\Controllers\Controller;
 use Notification;
@@ -27,7 +27,9 @@ class AdvertisesController extends Controller
     public function index()
     {
         //
-        return backendView('index');
+        return backendView('index', [
+            'list' => Advertises::all(),
+        ]);
     }
 
     /**
@@ -38,6 +40,7 @@ class AdvertisesController extends Controller
     public function create()
     {
         //
+        return backendView('create');
     }
 
     /**
@@ -46,9 +49,18 @@ class AdvertisesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdvertisesRequest $request)
     {
         //
+        try {
+            if (Advertises::create($request->all())) {
+                Notification::success('添加成功');
+                return redirect()->route('backend.advertises.index');
+            }
+        } catch (\Exception $e) {
+
+            return redirect()->back()->withError(array('error' => $e->getMessage()))->withInput();
+        }
     }
 
     /**
@@ -71,6 +83,9 @@ class AdvertisesController extends Controller
     public function edit($id)
     {
         //
+        return backendView('edit', [
+            'advertises' => Advertises::find($id),
+        ]);
     }
 
     /**
@@ -83,6 +98,14 @@ class AdvertisesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            if (Advertises::find($id)->update($request->all())) {
+                Notification::success('修改成功');
+                return redirect()->route('backend.advertises.index');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withError(array('error' => $e->getMessage()))->withInput();
+        }
     }
 
     /**
@@ -94,5 +117,13 @@ class AdvertisesController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            Advertises::destroy($id);
+            Notification::success('删除成功');
+        } catch (\Exception $e) {
+            Notification::error($e->getMessage());
+        }
+
+        return redirect()->route('backend.advertises.index');
     }
 }
